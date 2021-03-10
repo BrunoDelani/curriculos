@@ -1,0 +1,33 @@
+
+{% extends "base.html" %}
+{% block conteudo %}
+<h2>Listando Instituições</h2>
+{% if instituicao|count > 0 %}
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Sigla</th>
+        <th></th>
+        <th></th>
+    </tr>
+    {% for i in instituicao %}
+    <tr>
+        <td>{{ i.id }}</td>
+        <td>{{ i.nome }}</td>
+        <td>
+            {% if i.sigla %}
+            {{ i.sigla }}
+            {% else %}
+            {{ "-" }}
+            {% endif %}
+        </td>
+        <td><a href='/instituicao/deletar/{{ i.id }}' class="btn btn-danger">Excluir</a></td>
+        <td><a href='/instituicao/alterar/{{ i.id }}' class="btn btn-warning">Alterar</a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<div class="alert alert-danger">Nenhuma instituição encontrada para esta busca</div>
+{% endif %}
+{% endblock %}

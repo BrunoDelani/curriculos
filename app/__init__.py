@@ -15,8 +15,11 @@ manager.add_command('db', MigrateCommand)
 
 from app.models.tables import Usuario
 
-
-@app.route('/home')
-def home():
-    l = ['Programador','Manutenção','Marketing', 'Suporte']
-    return render_template('index.html', lista=l)
+from app.controllers import usuarios
+from app.controllers import instituicoes
+from app.controllers import home
+from app.controllers import formacaoAcademica
+from app.controllers import formacaoComplementar
+from app.controllers import cursos
+from app.controllers import atuacaoProfissional
+from app.controllers import atividadeProfissional

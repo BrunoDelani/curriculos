@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<h2>Listando Atuações Profissionais</h2>
+{% if atuacao_profissional|count > 0 %}
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Nome do Atuante</th>
+        <th>Instituição</th>
+        <th>Início</th>
+        <th>Término</th>
+        <th></th>
+        <th></th>
+    </tr>
+    {% for a in atuacao_profissional %}
+    <tr>
+        <td>{{ a.id }}</td>
+        {% for u in usuario %}
+            {% if a.usuario_id == u.id %}
+            <td>{{ u.nome }}</td>
+            {% endif %}
+        {% endfor %}
+        {% for i in instituicao %}
+        {% if i.id == a.instituicao_id %}
+            <td>{{ i.nome }}</td>
+            {% endif %}
+        {% endfor %}
+        <td>{{ a.inicio }}</td>
+        <td>{{ a.termino }}</td>
+        <td><a href='/atuacaoProfissional/deletar/{{ a.id }}' class="btn btn-danger">Excluir</a></td>
+        <td><a href='/atuacaoProfissional/alterar/{{ a.id }}' class="btn btn-warning">Alterar</a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<div class="alert alert-danger">Nenhuma Atuação Profissional encontrado para esta busca</div>
+{% endif %}
+{% endblock %}
